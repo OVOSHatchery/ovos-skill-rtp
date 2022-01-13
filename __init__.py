@@ -22,16 +22,12 @@ class RTPSkill(OVOSCommonPlaybackSkill):
     @property
     def javascript(self):
         # webview can run javascript on page load
-        return """
-        document.getElementsByClassName("bg-gray-list padding-bottom-65")[0].remove();
-        document.getElementById("acess-buttons-container").remove();
-        document.getElementsByClassName("container-menu-rtp")[0].remove();
-        document.getElementsByClassName("col-xs-12 text-center promo-btns")[0].remove();
-        document.getElementsByClassName("col-xs-12 text-center text-white")[0].remove();
-        document.getElementsByClassName("col-xs-12 text-center promo-copy")[0].remove();
-        document.getElementsByClassName("bg-footer")[0].remove();
-        document.getElementById("LiveContentData").remove();
-        """
+        # useFullscreen is provided by OCP, it will
+        # - find a video element
+        # - remove all other elements
+        # - toggle fullscreen
+        # TODO RTP video player starts muted, figure out how to unmute
+        return """useFullscreen()"""
 
     @ocp_featured_media()
     def featured_media(self):
