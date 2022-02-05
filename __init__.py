@@ -33,7 +33,7 @@ class RTPSkill(OVOSCommonPlaybackSkill):
     def featured_media(self):
         return [{
             "title": ch["name"],
-            "image": ch["img"],
+            "image": f'https://cdn-images.rtp.pt/common/img/channels/logos/color/horizontal/{ch["img"]}',
             "match_confidence": 80,
             "media_type": MediaType.TV,
             "uri": f"https://www.rtp.pt/play/direto/{idx}",
@@ -59,8 +59,8 @@ class RTPSkill(OVOSCommonPlaybackSkill):
 
     @ocp_search()
     def search_db(self, phrase, media_type):
-        score = self.match_skill(phrase, media_type)
         if self.voc_match(phrase, "rtp"):
+            score = self.match_skill(phrase, media_type)
             yield {
                 "match_confidence": score,
                 "media_type": MediaType.TV,
